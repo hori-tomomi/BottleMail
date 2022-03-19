@@ -19,6 +19,9 @@
 		35B07AE727D526200041C74A /* CreateBottleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B07AE627D526200041C74A /* CreateBottleViewController.swift */; };
 		35B07AE927D5264B0041C74A /* MailBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B07AE827D5264B0041C74A /* MailBoxViewController.swift */; };
 		35B07AEB27D526590041C74A /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B07AEA27D526590041C74A /* ReadViewController.swift */; };
+		35B07AEE27DF2FB30041C74A /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 35B07AED27DF2FB30041C74A /* Realm */; };
+		35B07AF027DF2FB30041C74A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 35B07AEF27DF2FB30041C74A /* RealmSwift */; };
+		35B07AF427E22D060041C74A /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B07AF327E22D060041C74A /* Bottle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,7 @@
 		35B07AE627D526200041C74A /* CreateBottleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBottleViewController.swift; sourceTree = "<group>"; };
 		35B07AE827D5264B0041C74A /* MailBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailBoxViewController.swift; sourceTree = "<group>"; };
 		35B07AEA27D526590041C74A /* ReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewController.swift; sourceTree = "<group>"; };
+		35B07AF327E22D060041C74A /* Bottle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B07AF027DF2FB30041C74A /* RealmSwift in Frameworks */,
+				35B07AEE27DF2FB30041C74A /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +121,7 @@
 				35B07AE627D526200041C74A /* CreateBottleViewController.swift */,
 				35B07AE827D5264B0041C74A /* MailBoxViewController.swift */,
 				35B07AEA27D526590041C74A /* ReadViewController.swift */,
+				35B07AF327E22D060041C74A /* Bottle.swift */,
 			);
 			path = BottleMail;
 			sourceTree = "<group>";
@@ -152,6 +159,10 @@
 			dependencies = (
 			);
 			name = BottleMail;
+			packageProductDependencies = (
+				35B07AED27DF2FB30041C74A /* Realm */,
+				35B07AEF27DF2FB30041C74A /* RealmSwift */,
+			);
 			productName = BottleMail;
 			productReference = 35B07AB327D501DE0041C74A /* BottleMail.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +235,9 @@
 				Base,
 			);
 			mainGroup = 35B07AAA27D501DE0041C74A;
+			packageReferences = (
+				35B07AEC27DF2FB30041C74A /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 35B07AB427D501DE0041C74A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -273,6 +287,7 @@
 				35B07AB727D501DE0041C74A /* AppDelegate.swift in Sources */,
 				35B07AEB27D526590041C74A /* ReadViewController.swift in Sources */,
 				35B07AB927D501DE0041C74A /* SceneDelegate.swift in Sources */,
+				35B07AF427E22D060041C74A /* Bottle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +466,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QL999ZD3FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BottleMail/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -478,6 +494,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QL999ZD3FN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BottleMail/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -610,6 +627,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35B07AEC27DF2FB30041C74A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35B07AED27DF2FB30041C74A /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35B07AEC27DF2FB30041C74A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		35B07AEF27DF2FB30041C74A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35B07AEC27DF2FB30041C74A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35B07AAB27D501DE0041C74A /* Project object */;
 }
