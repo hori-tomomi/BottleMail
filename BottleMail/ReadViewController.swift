@@ -6,15 +6,39 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ReadViewController: UIViewController {
+    
+    @IBOutlet var _titleTextField: UITextField!
+    @IBOutlet var _createdDateTextField: UITextField!
+    @IBOutlet var _contentTextView: UITextView!
+    
+    var bottleItem: BottleContents!
+    var _index: Int!
+    
+    var _titleText: String!
+    var _contentText: String!
+    var _createdDateText: String!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        //let realm = try! Realm()
 
         // Do any additional setup after loading the view.
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        _titleTextField.text = _titleText
+        _contentTextView.text = _contentText
+        _createdDateTextField.text = _createdDateText
+    }
 
     /*
     // MARK: - Navigation

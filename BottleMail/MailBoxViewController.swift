@@ -12,16 +12,27 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
 
     var bottleItems: Results<BottleContents>!
+    var list: List<BottleContents>!
+    var selectedBottle: BottleContents!
+    var cellNum: Int!
+   // var bottleContentList: Results<BottleContents>!
     
     @IBOutlet var table: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMdkHms", options: 0, locale: Locale(identifier: "ja_JP"))
+        print(dateFormatter.string(from: now))
+        
         table.dataSource = self
         let realm = try! Realm()
         // Realmのfunctionでデータを取得。functionを更に追加することで、フィルターもかけられる
-        self.bottleItems = realm.objects(BottleContents.self)
+        
+        //recieveDateが今日の日付と一緒だったら　　がToDateと本日までの日付の間立ったら表示
+        self.bottleItems = realm.objects(BottleContents.self).filter("receiveDate <= %@" , now)
         table.reloadData()
         
         //Realm内に保存した内容を保存するための定数bottleの初期化
@@ -72,14 +83,30 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoReadView" {
+            if let indexPath = table.indexPathForSelectedRow {
+                guard let destination = segue.destination as? ReadViewController else {
+                    fatalError("Failed to prepare DetailViewController.")
+                }
+                cellNum = indexPath.row
+                let item: BottleContents = bottleItems[cellNum];
+                destination._titleText = item.title
+                destination._createdDateText = item.createDate
+                destination._contentText = item.content
+                }
+        }
+    }
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
         return true
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "GoReadView", sender: nil)
-      }
+        
+      }*/
 
     
 

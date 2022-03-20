@@ -8,15 +8,20 @@
 import UIKit
 import RealmSwift
 
+
 var titleArray = [String]()
 var dateArray = [String]()
 var contentsArray = [String]()
+
+var ToDate = DateFormatter.date
+
 
 class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     let realm = try! Realm()
 
     @IBOutlet var _createdDatePicker: UIDatePicker!
+    @IBOutlet var _receiveDatePicker: UIDatePicker!
     @IBOutlet var _titleTextField: UITextField!
     @IBOutlet var _contentTextView: UITextView!
     @IBOutlet var _addButton: UIButton!
@@ -31,7 +36,10 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
         //let bottle: BottleContents? = read()
         
         _createdDatePicker.preferredDatePickerStyle = .compact
-        _createdDatePicker.datePickerMode = .dateAndTime
+        _createdDatePicker.datePickerMode = .date
+        _receiveDatePicker.preferredDatePickerStyle = .compact
+        _receiveDatePicker.datePickerMode = .date
+
         _titleTextField.delegate = self
         
         let custombar = UIView(frame: CGRect(x:0, y:0,width:(UIScreen.main.bounds.size.width),height:40))
@@ -75,9 +83,11 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
         let bottleItem:BottleContents = BottleContents()
         let formatter = DateFormatter()
         
+        
         formatter.dateFormat = "yyyy/MM/dd"
         _createdDateText = "\(formatter.string(from: _createdDatePicker.date))"
         
+        bottleItem.receiveDate = self._receiveDatePicker.date
         bottleItem.title = self._titleTextField.text
         bottleItem.createDate = self._createdDateText
         bottleItem.content = self._contentTextView.text
@@ -87,6 +97,7 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
         }
            
         _titleTextField.text = ""
+        _contentTextView.text = ""
         print ("保存されたかなあ")
     }
     
