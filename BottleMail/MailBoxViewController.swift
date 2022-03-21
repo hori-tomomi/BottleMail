@@ -11,11 +11,8 @@ import RealmSwift
 class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
 
-    var bottleItems: Results<BottleContents>!
-    var list: List<BottleContents>!
-    var selectedBottle: BottleContents!
-    var cellNum: Int!
-   // var bottleContentList: Results<BottleContents>!
+    var _bottleItems: Results<BottleContents>!
+    var _cellNum: Int!
     
     @IBOutlet var table: UITableView!
 
@@ -29,19 +26,10 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
         
         table.dataSource = self
         let realm = try! Realm()
-        // Realmのfunctionでデータを取得。functionを更に追加することで、フィルターもかけられる
         
-        //recieveDateが今日の日付と一緒だったら　　がToDateと本日までの日付の間立ったら表示
-        self.bottleItems = realm.objects(BottleContents.self).filter("receiveDate <= %@" , now)
+        //recieveDateが今日より前の日付だったら表示
+        self._bottleItems = realm.objects(BottleContents.self).filter("receiveDate <= %@" , now)
         table.reloadData()
-        
-        //Realm内に保存した内容を保存するための定数bottleの初期化
-        //let bottle: BottleContents? = read()
-        
-        /*if bottle != nil {
-            
-        }*/
-
 
         // Do any additional setup after loading the view.
     }
@@ -52,18 +40,17 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
             table.reloadData()
     }
     
-    
     //UITableView、numberOfRowsInSectionの追加(表示するcell数を決める)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //戻り値の設定(表示するcell数)
-        return bottleItems.count
+        return _bottleItems.count
     }
     
     //UITableView、cellForRowAtの追加(表示するcellの中身を決める)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let bottleCell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "BottleCell", for: indexPath)
-        let item: BottleContents = bottleItems[(indexPath).row];
+        let item: BottleContents = _bottleItems[(indexPath).row];
         bottleCell.textLabel?.text = item.title
         //戻り値の設定（表示する中身)
         return bottleCell
@@ -79,7 +66,7 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
     func deleteBottle(at index: Int){
         let realm = try! Realm()
         try! realm.write{
-            realm.delete(bottleItems[index])
+            realm.delete(_bottleItems[index])
         }
     }
     
@@ -89,8 +76,8 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
                 guard let destination = segue.destination as? ReadViewController else {
                     fatalError("Failed to prepare DetailViewController.")
                 }
-                cellNum = indexPath.row
-                let item: BottleContents = bottleItems[cellNum];
+                _cellNum = indexPath.row
+                let item: BottleContents = _bottleItems[_cellNum];
                 destination._titleText = item.title
                 destination._createdDateText = item.createDate
                 destination._contentText = item.content
@@ -102,11 +89,6 @@ class MailBoxViewController: UIViewController,UITableViewDelegate,UITableViewDat
     {
         return true
     }
-    
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "GoReadView", sender: nil)
-        
-      }*/
 
     
 

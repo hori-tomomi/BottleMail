@@ -8,14 +8,6 @@
 import UIKit
 import RealmSwift
 
-
-var titleArray = [String]()
-var dateArray = [String]()
-var contentsArray = [String]()
-
-var ToDate = DateFormatter.date
-
-
 class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     let realm = try! Realm()
@@ -31,9 +23,6 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Realm内に保存した内容を保存するための定数bottleの初期化
-        //let bottle: BottleContents? = read()
         
         _createdDatePicker.preferredDatePickerStyle = .compact
         _createdDatePicker.datePickerMode = .date
@@ -64,13 +53,6 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
         return true
     }
     
-    //Realmにアクセスして、情報を読み出す
-    /*func read() -> BottleContents? {
-        
-        return realm.objects(BottleContents.self).first
-        
-    }*/
-    
     @objc func onClickCommitButton (sender: UIButton) {
         if(_contentTextView.isFirstResponder){
             _contentTextView.resignFirstResponder()
@@ -82,7 +64,6 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
         let realm_2 = try! Realm()
         let bottleItem:BottleContents = BottleContents()
         let formatter = DateFormatter()
-        
         
         formatter.dateFormat = "yyyy/MM/dd"
         _createdDateText = "\(formatter.string(from: _createdDatePicker.date))"
@@ -98,7 +79,6 @@ class CreateBottleViewController: UIViewController, UITextFieldDelegate, UITextV
            
         _titleTextField.text = ""
         _contentTextView.text = ""
-        print ("保存されたかなあ")
     }
     
 

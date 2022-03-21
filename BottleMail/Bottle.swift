@@ -13,9 +13,4 @@ class BottleContents: Object{
     @objc dynamic var content: String? = nil
     @objc dynamic var createDate: String? = nil
     @objc dynamic var receiveDate = Date()
-    //Realmは配列使えないので、realmから持ってきたデータをMailBoxViewController内で配列にぶち込んで使う方法検討
-}
-
-class BottleContentsList: Object {
-    let list = List<BottleContents>()
 }

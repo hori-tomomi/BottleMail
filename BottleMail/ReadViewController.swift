@@ -16,17 +16,12 @@ class ReadViewController: UIViewController {
     
     var bottleItem: BottleContents!
     var _index: Int!
-    
     var _titleText: String!
     var _contentText: String!
     var _createdDateText: String!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        //let realm = try! Realm()
 
         // Do any additional setup after loading the view.
         
